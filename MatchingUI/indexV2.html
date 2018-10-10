@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/jquery.ui-slider.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="js/jquery.ui-slider.js"></script>
+        <script src="jquery-ui.js"></script>
+        <link href="jquery-ui.css" rel="stylesheet">
+        <style>
+        
+        .slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+        
+        </style>
+        <script>
+
+            
+
+      
+        </script>
+        <style type="text/css">
+
+            .value.editing {
+                color: #aaa;
+            }
+
+            .ui-slider-control.horizontal {
+                width: 100%;
+            }
+            .ui-slider-control.vertical {
+                height: 200px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+           
+          
+       
+               
+               
+           </div>
+             <div class="row">
+                
+                
+                   <div class="col-xs-12 col-sm-8 text-center" id="skill-contrainer">
+               <hr>
+                <div class="col-xs-12 col-sm-12 text-center" id="onerow">
+            
+                <div class="col-xs-12 col-sm-12 text-center">
+                      <!--  skill 1 -- -->
+                 </div>
+                   <hr>
+                   
+                   
+                  
+                   
+          
+                </div>
+                <div class="col-xs-12 col-sm-12 text-center">
+                      <!--  skill 1 -- -->
+                <hr>
+                   
+                   
+                  
+                   
+          
+                </div>
+                       
+                <button type="button" id="addskill" class="btn btn-primary">Add new Skill</button>
+                     </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                
+                    <button type="button" id="senddata" class="btn btn-primary">Predict</button>
+                    <table class="table" id="skilltable">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Recommended Job</th>
+                          <th scope="col">--</th>
+                        
+                        </tr>
+                      </thead>
+                      <tbody>
+                  
+                      </tbody>
+                    </table>
+
+
+                </div>
+                
+
+     
+        
+        <script>
+            
+            
+           
+             $( function() {
+    var availableTags = [
+      "Java",
+      "Python",
+      "Swift",
+      "IOS",
+      "Android",
+      "AngularJS",
+      "HTML",
+      "CSS",
+      "deep learning",
+      "Machine Learning",
+      "Spark",
+      "Hadoop",
+      "Php",
+      "JavaScript",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala"
+    ];
+    $( "#textvalue1" ).autocomplete({
+      source: availableTags
+    });
+
+       $( "#textvalue2" ).autocomplete({
+      source: availableTags
+    });
+
+       $( "#textvalue3" ).autocomplete({
+      source: availableTags
+    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+  } );
+            
+            
+            
+         var text = 
+'{ "Java" :'+parseFloat($('#value1').text())+' , '+
+'"Python" :'+parseFloat($('#value2').text())+' , '+
+'"Swift" :'+parseFloat($('#value3').text())+' , '+
+'"IOS" :'+parseFloat($('#value4').text())+' , '+
+'"Android" :'+parseFloat($('#value5').text())+' , '+
+'"AngularJS" :'+parseFloat($('#value6').text())+' , '+
+'"HTML" :'+parseFloat($('#value7').text())+' , '+
+'"CSS" :'+parseFloat($('#value8').text())+' , '+
+'"deep learning" :'+parseFloat($('#value9').text())+' , '+
+'"Machine Learning" :'+parseFloat($('#value10').text())+' , '+
+'"Spark" :'+parseFloat($('#value11').text())+' , '+
+'"Hadoop" :'+parseFloat($('#value12').text())+' , '+
+'"Php" :'+parseFloat($('#value13').text())+' }';
+            
+        
+        $("#senddata").click(function(){
+               var obj = "";
+             var obj = '{';  
+       
+            
+            
+            var status  = document.getElementsByClassName("slider");
+                   
+for (var i = 0; i < status.length; i++) {
+       var x =  status[i].parentElement.parentElement;
+    var y = x.children[1];
+ 
+  obj+= '"'+y.children[0].value+'" : '+status[i].value;
+    if(i<status.length){
+      obj  += ","
+    }else{
+        
+      obj  +='}';
+        
+    }
+}
+     obj  +='}';       
+console.log(obj);
+            
+
+                 /*
+            var status  = document.getElementsByClassName("slider");
+    
+var jsonArr = [];
+data=[];
+            
+
+for (var i = 0; i < status.length; i++) {
+       var x =  status[i].parentElement.parentElement;
+    var y = x.children[1];
+ 
+  obj+= y.children[0].value+" : "+status[i].value;
+    if(i<status.length){
+      obj  += ","
+    }else{
+        
+      obj  +='}';
+        
+    }
+}
+            
+console.log(obj);
+    
+   
+
+
+   // alert(status[i].className);
+
+   // data.append({y.children[0].value : status[i].value});
+    
+
+    jsonArr.push({
+        id:y.children[0].value,
+        optionValue: status[i].value
+    });
+ 
+
+//console(obj);
+  //  alert(obj);
+  //jsonData=json.dumps(data) ;  
+       
+     
+
+    
+            
+          
+       //    alert(jsonData); 
+    
+     console.log(jsonArr);        
+            
+            
+            
+      */     
+            
+            
+            
+           var text =     '{ "Java" :'+parseFloat($('#value1').text())+' , '+
+'"Python" :'+parseFloat($('#value2').text())+' , '+
+'"Swift" :'+parseFloat($('#value3').text())+' , '+
+'"IOS" :'+parseFloat($('#value4').text())+' , '+
+'"Android" :'+parseFloat($('#value5').text())+' , '+
+'"AngularJS" :'+parseFloat($('#value6').text())+' , '+
+'"HTML" :'+parseFloat($('#value7').text())+' , '+
+'"CSS" :'+parseFloat($('#value8').text())+' , '+
+'"deep learning" :'+parseFloat($('#value9').text())+' , '+
+'"Machine Learning" :'+parseFloat($('#value10').text())+' , '+
+'"Spark" :'+parseFloat($('#value11').text())+' , '+
+'"Hadoop" :'+parseFloat($('#value12').text())+' , '+
+'"Php" :'+parseFloat($('#value13').text())+' }';
+
+          
+            
+xhr = new XMLHttpRequest();
+var url = "http://127.0.0.1:5000/test/34";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-type", "application/json");
+xhr.onreadystatechange = function () { 
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json["preds"][0][1]);
+        
+        
+        
+        var table = document.getElementById("skilltable");
+        
+       //var row = table.insertRow(table.rows.length - 1);
+        table.innerHTML = "";
+    for (var i = 0; i < json["preds"][0].length; i++) {
+ 
+    var row = table.insertRow(table.rows.length - 1);
+    var cell0 = row.insertCell(0);    
+    var cell1 = row.insertCell(1);
+    var cell2 = row.insertCell(2);
+  
+    cell0.innerHTML = i;
+        
+        switch(i) {
+    case 0:
+        cell1.innerHTML = "Data Analyst";
+        break;
+    case 1:
+        cell1.innerHTML = "Data Sience";
+        break;
+    case 2:
+        cell1.innerHTML = "Machine Learning";
+        break;
+    case 3:
+        cell1.innerHTML = "Mobile Developer";
+        break;
+    case 4:
+        cell1.innerHTML = "Web Developer";
+        break;
+    default:
+        cell1.innerHTML = "";
+}
+    cell2.innerHTML = json["preds"][0][i].toFixed(2)+ "%";
+    //Do something
+}
+
+    }
+}
+
+
+
+    
+
+
+
+var data =JSON.stringify(eval('('+obj+')'));  
+            console.log("qsdfqsdf");
+            console.log(data);
+xhr.send(data);
+
+
+            
+    });   
+            
+
+            
+            var count = 4;
+            var slider = document.getElementById("myRange");
+var output = document.getElementById("slidervalue");
+           
+//output.innerHTML = slider.value; 
+            
+            function updateValue(id) {
+                
+              //  id.parentElement().html("sf");
+            var x  =   document.getElementById(id.id).parentElement.parentElement.children[3].children[0].children[0];
+              x.innerHTML = id.value;
+                console.log(x);
+            }
+            
+
+            
+               $("#addskill").click(function(){
+
+                   
+    
+var jsonArr = [];
+data=[];
+            
+/*
+
+
+*/
+                   
+
+                   
+                   
+                   
+                   
+               count++;
+               
+            var content = '     <div class="col-xs-12 col-sm-12 text-center"> <div class="row"><div class = "col-md-2 text-center ddd"><label class="control-label " >skill 3:</label> <!-- Content goes here -->  </div> <div class = "col-md-3 text-center"><input type="text" id="textvalue'+count+'"  value="Swift" name="" class="form-control"> <!-- Content goes here -->  </div><div class = "col-md-4 text-center">   <input type="range" min="1" max="100" value="50" class="slider"  onclick="updateValue(this)" id="myRange'+count+'"><!-- Content goes here -->   </div> <div class = "col-md-3 text-center"><!-- Content goes here -->                             <p> <b id="slidervalue'+count+'" class="value">0</b>%</p></div></div> <hr>  </div> ';
+             
+                   
+                   
+                       
+               
+
+         $(this).before( content );
+               
+                   
+        
+                                  var availableTags = [
+      "Java",
+      "Python",
+      "Swift",
+      "IOS",
+      "Android",
+      "AngularJS",
+      "HTML",
+      "CSS",
+      "deep learning",
+      "Machine Learning",
+      "Spark",
+      "Hadoop",
+      "Php",
+      "JavaScript",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala"
+    ];
+
+               
+                    $( function() {
+                        
+                     
+
+       $("#textvalue"+count).autocomplete({
+      source: availableTags
+    });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  } );
+               
+                   console.log($(document.getElementById("myRange")).value+"qsdfqsdf");
+               $("#slidervalue"+count).html($("#myRange"+count).val());
+               $("#myRange"+count).oninput =  function() {
+  document.getElementById("slidervalue"+count).innerHTML = this.value;
+}    
+                   
+                   console.log("myRange"+count);
+             console.log(document.getElementById("myRange"+count).value+"qsdfqsdf");
+            
+               $("#slidervalue"+count).html(document.getElementById("myRange"+count).value);
+               $("#myRange"+count).oninput =  function() {
+  $("#slidervalue"+count).html= this.value;
+                   console.log($("#slidervalue"+count).html)
+
+               
+               }});
+            
+            
+            
+        
+ /*            
+
+        slider.oninput = function() {
+  output.innerHTML = this.value;
+}    
+        
+     */
+   
+        
+        
+        
+            
+            
+            
+            
+            // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+
+         //  alert(document.getElementById("value13").innerHTML)
+        
+            
+      //  var status  = document.getElementsByID("uniqueID"); // this works too
+/*
+var status  = document.getElementsByName("status")[0];
+var jsonArr = [];
+
+for (var i = 0; i < status.options.length; i++) {
+    jsonArr.push({
+        id: status.options[i].text,
+        optionValue: status.options[i].value
+    });
+}     
+    
+*/
+        
+        
+           $(document).ready(function () {
+               
+               
+               
+               $(".slider").on('change', function () { console.log(this.value); })
+
+                
+                    var availableTags = [
+      "Java",
+      "Python",
+      "Swift",
+      "IOS",
+      "Android",
+      "AngularJS",
+      "HTML",
+      "CSS",
+      "deep learning",
+      "Machine Learning",
+      "Spark",
+      "Hadoop",
+      "Php",
+      "JavaScript",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala"
+    ];
+                var position = 50;
+
+                $('.ui-slider')
+                    .UISlider({
+                        min: 1,
+                        max: 100,
+                        value: position
+                    })
+                    .on('change thumbmove', function (event, value) {
+
+                        var targetPath = $(event.target).data('target');
+
+                        $(targetPath).text(value.toFixed(2));
+
+                    })
+                    .on('start', function () {
+
+                        $('.value').addClass('editing');
+
+                    })
+                    .on('end', function () {
+
+                        $('.value').removeClass('editing');
+
+                    });
+
+                $('.value').text(position);
+
+
+                $('input[type=checkbox]')
+                        .on('change', function () {
+
+                            var name = $(this).prop('name'),
+                                value = $(this).prop('checked');
+
+                            if (name === 'popup') {
+
+                                $('.popup-buttons').toggle( value );
+
+                            } else {
+
+                                $('..ui-').UISlider( name, value );
+                            }
+                        });
+                
+                
+             var count = 4;
+           $("#addskill").click(function(){
+               count++;
+               
+            var content = '     <div class="col-xs-12 col-sm-12 text-center"> <div class="row"><div class = "col-md-2 text-center"><label class="control-label " >skill 3:</label> <!-- Content goes here -->  </div> <div class = "col-md-3 text-center"><input type="text" id="textvalue'+count+'"  value="Swift" name="" class="form-control"> <!-- Content goes here -->  </div><div class = "col-md-4 text-center">   <input type="range" min="1" max="100" value="50" class="slider" id="myRange'+count+'"><!-- Content goes here -->   </div> <div class = "col-md-3 text-center"><!-- Content goes here -->                             <p> <b id="slidervalue'+count+'" class="value">0</b>%</p></div></div> <hr>  </div> ';
+               
+         
+
+               
+
+
+        
+        
+        
+        
+               
+               
+           
+               
+               
+                   $("#value"+count).UISlider({
+                        min: 1,
+                        max: 100,
+                        value: position
+                    })
+                    .on('change thumbmove', function (event, value) {
+
+                        var targetPath = $(event.target).data('target');
+
+                        $(targetPath).text(value.toFixed(2));
+
+                    })
+                    .on('start', function () {
+
+                        $('.value').addClass('editing');
+
+                    })
+                    .on('end', function () {
+
+                        $('.value').removeClass('editing');
+
+                    }).autocomplete({
+                        source: availableTags
+                    });    
+
+                $('.valueml').text(position);  
+
+});
+                 });    
+      
+      
+  
+   
+            
+
+        </script>
+    </body>
+</html>
