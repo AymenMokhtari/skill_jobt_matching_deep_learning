@@ -91,14 +91,14 @@ classifier = Sequential()
 classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu', input_dim = 13))
 
 classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dropout(p = 0.2))
+
+classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
+classifier.add(Dropout(p = 0.2))
 
 
 classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
-
-
-
-classifier.add(Dense(units = 9, kernel_initializer = 'uniform', activation = 'relu'))
-
+classifier.add(Dropout(p = 0.2))
 
 
 
